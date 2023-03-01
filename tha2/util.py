@@ -20,8 +20,13 @@ def torch_save(content, file_name):
 
 
 def torch_load(file_name):
+    maplocation = 'none'
+    if torch.cuda.is_available():
+      maplocation = 'none'
+    else:
+      maplocation = 'cpu'
     with open(file_name, 'rb') as f:
-        return torch.load(f)
+        return torch.load(f, map_location=maplocation)
 
 
 def srgb_to_linear(x):
